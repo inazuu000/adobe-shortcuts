@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --surface2: #eef0f4; --line: #d9dee5;
+  --fg: #13171c; --muted: #515c6b;
+  --ok: #17803d; --bad: #b3261e; --warn: #8a5300;
+  --ps: #1d62d6; --ps-fg: #ffffff;
+  --ai: #a84b00; --ai-fg: #ffffff;
+}
+.dark {
+  --bg: #0e1115; --surface: #161a20; --surface2: #1e242c; --line: #2a323d;
+  --fg: #eef1f5; --muted: #a2adbb;
+  --ok: #5bdc8b; --bad: #ff8a7d; --warn: #fbbf24;
+  --ps: #6aa5ff; --ps-fg: #06101f;
+  --ai: #ffa94d; --ai-fg: #1c0f00;
+}
+[data-sw="photoshop"] { --accent: var(--ps); --accent-fg: var(--ps-fg); }
+[data-sw="illustrator"] { --accent: var(--ai); --accent-fg: var(--ai-fg); }
+:root:not([data-sw]) { --accent: var(--ps); --accent-fg: var(--ps-fg); }
+
+@theme inline {
+  --color-bg: var(--bg); --color-surface: var(--surface); --color-surface2: var(--surface2);
+  --color-line: var(--line); --color-fg: var(--fg); --color-muted: var(--muted);
+  --color-ok: var(--ok); --color-bad: var(--bad); --color-warn: var(--warn);
+  --color-accent: var(--accent); --color-accentfg: var(--accent-fg);
+  --color-ps: var(--ps); --color-ai: var(--ai);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+*:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.page-enter { animation: pageIn .22s ease-out; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .page-enter { animation: none; } * { transition: none !important; } }
+.kbd { font-family: var(--font-mono); font-size: .8125rem; padding: .15rem .45rem; border-radius: .4rem; border: 1px solid var(--line); background: var(--surface2); white-space: nowrap; }
+/* original reference pixels: never recoloured, filtered or redrawn */
+.ref-icon { display: block; image-rendering: auto; max-width: none; }
